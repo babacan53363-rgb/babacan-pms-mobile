@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b2b46" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Babacan PMS Mobile</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <section id="loginView" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-mark">B</div>
+      <p class="eyebrow">BABACAN YAZILIM</p>
+      <h1>PMS Mobile</h1>
+      <p class="muted">Otelinizi her yerden güvenle takip edin.</p>
+      <form id="loginForm">
+        <label>E-posta<input id="email" type="email" autocomplete="email" required placeholder="yonetici@otel.com" /></label>
+        <label>Şifre<input id="password" type="password" autocomplete="current-password" required placeholder="••••••••" /></label>
+        <button class="primary" type="submit">Giriş Yap</button>
+      </form>
+      <button id="demoBtn" class="ghost" type="button">Demo Paneli Aç</button>
+      <p id="configWarning" class="warning hidden">Supabase ayarları henüz girilmemiş. Demo modunu kullanabilirsiniz.</p>
+    </div>
+  </section>
+
+  <section id="appView" class="app hidden">
+    <header class="topbar">
+      <div><p class="eyebrow">BABACAN PMS MOBILE</p><h2 id="hotelName">Otel Yönetim Paneli</h2></div>
+      <button id="refreshBtn" class="icon-btn" aria-label="Yenile">↻</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div><span id="syncDot" class="dot"></span><span id="syncText">Bağlantı kontrol ediliyor</span></div>
+        <strong id="todayText"></strong>
+      </section>
+
+      <section id="stats" class="stats"></section>
+
+      <section id="dashboardPage" class="page active">
+        <div class="section-head"><h3>Oda Özeti</h3><button data-page="roomsPage" class="text-btn">Tümünü Gör</button></div>
+        <div id="roomPreview" class="room-grid compact"></div>
+        <div class="section-head"><h3>Son Kasa Hareketleri</h3><button data-page="cashPage" class="text-btn">Detay</button></div>
+        <div id="cashPreview" class="list"></div>
+      </section>
+
+      <section id="roomsPage" class="page">
+        <div class="section-head"><h3>Odalar</h3><div class="filters"><button class="chip active" data-filter="all">Tümü</button><button class="chip" data-filter="occupied">Dolu</button><button class="chip" data-filter="vacant">Boş</button></div></div>
+        <div id="roomList" class="room-grid"></div>
+      </section>
+
+      <section id="guestsPage" class="page">
+        <div class="section-head"><h3>Konaklayanlar</h3><span id="guestCount" class="badge"></span></div>
+        <div id="guestList" class="list"></div>
+      </section>
+
+      <section id="cashPage" class="page">
+        <div class="section-head"><h3>Kasa Hareketleri</h3><span id="cashTotal" class="badge"></span></div>
+        <div id="cashList" class="list"></div>
+      </section>
+
+      <section id="settingsPage" class="page">
+        <div class="settings-card">
+          <h3>Bağlantı</h3>
+          <p class="muted">Son senkronizasyon</p><strong id="lastSync">—</strong>
+          <hr />
+          <button id="logoutBtn" class="danger">Oturumu Kapat</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="dashboardPage"><span>⌂</span>Ana Sayfa</button>
+      <button class="nav-item" data-page="roomsPage"><span>▦</span>Odalar</button>
+      <button class="nav-item" data-page="guestsPage"><span>♙</span>Misafirler</button>
+      <button class="nav-item" data-page="cashPage"><span>₺</span>Kasa</button>
+      <button class="nav-item" data-page="settingsPage"><span>⚙</span>Ayarlar</button>
+    </nav>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

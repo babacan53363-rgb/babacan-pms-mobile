@@ -1,0 +1,9 @@
+{
+  "name":"Babacan PMS Mobile",
+  "short_name":"Babacan PMS",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f3f7fa",
+  "theme_color":"#0b2b46",
+  "icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

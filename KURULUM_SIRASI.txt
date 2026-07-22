@@ -1,0 +1,10 @@
+BABACAN PMS MOBILE V1.2 - HAZIR KURULUM
+
+1) Bu klasörün İÇİNDEKİ dosyaları GitHub'daki mobil panel reposunun ana dizinine yükleyin.
+2) GitHub'da index.html, app.js, style.css ve config.js doğrudan görünmelidir.
+3) Repoyu Vercel'e bağlayın veya mevcut bağlı repoya push yapın.
+4) Vercel yayını tamamlanınca verilen adresi telefondan açın.
+5) Supabase Authentication hesabınızın e-posta ve şifresiyle giriş yapın.
+
+Supabase proje bilgileri config.js içine hazır yazılmıştır.
+Service role/secret key kullanılmamıştır.
