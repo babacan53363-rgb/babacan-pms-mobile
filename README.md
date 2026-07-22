@@ -1,44 +1,27 @@
-# Babacan PMS Mobile V1.1 — Mevcut Cloud Tablolarına Bağlı
+# Babacan PMS Mobile V1.3
 
-Bu sürüm, yeni `mobile_rooms` veya `mobile_guests` tablolarına veri kopyalamaz. Masaüstü PMS'nin doldurduğu mevcut tabloları doğrudan okur:
+Bu klasör Vercel'e doğrudan yüklenebilen mobil yönetim panelidir.
 
-- `hotel_rooms`
-- `hotel_guests`
-- `hotel_extras`
-- `hotel_payments`
-- `hotel_transactions`
+## Kurulum
 
-## Kurulum sırası
+1. Supabase > SQL Editor > New Query açın.
+2. `sql/04_mobile_dashboard_rpc.sql` dosyasının tamamını yapıştırıp Run'a basın.
+3. GitHub'daki `babacan-pms-mobile` reposuna bu klasörün İÇİNDEKİ dosyaları yükleyin.
+4. Vercel ekranında ayarları değiştirmeden Deploy'a basın.
+5. Yayın adresini açıp Supabase Authentication kullanıcınızın e-posta ve şifresiyle giriş yapın.
+6. Masaüstü PMS > Cloud Merkezi > Şimdi Senkronize Et çalıştırın.
 
-### 1. Supabase SQL
-Supabase → **SQL Editor → New Query** bölümünde yalnızca şu dosyayı açıp çalıştırın:
+## GitHub ana dizininde görünmesi gerekenler
 
-`sql/03_connect_existing_hotel_tables.sql`
-
-Başarılı olunca `Success. No rows returned` benzeri mesaj görünür.
-
-### 2. Kullanıcıyı otele bağlama
-Authentication → Users ekranındaki kullanıcının UUID değerini ve Table Editor → hotels tablosundaki otel UUID değerini alın.
-
-SQL Editor'de çalıştırın:
-
-```sql
-insert into public.mobile_profiles (user_id, hotel_id, role)
-values ('KULLANICI_UUID', 'OTEL_UUID', 'owner')
-on conflict (user_id) do update
-set hotel_id = excluded.hotel_id, role = excluded.role;
-```
-
-### 3. Supabase bağlantısı
-`config.js` dosyasına Supabase **Project URL** ve **anon/publishable key** değerini yazın.
-
-### 4. Vercel'e yükleme
-Bu klasörün içindeki dosyaları mobil panel için kullandığınız GitHub deposunun kök dizinine yükleyin. Vercel otomatik deploy eder.
-
-### 5. Masaüstü senkronizasyonu
-Babacan PMS → **Cloud Merkezi** üzerinden aynı Supabase kullanıcı hesabıyla giriş yapın ve **Şimdi Senkronize Et** seçeneğini çalıştırın.
-
-Mobil paneli yenilediğinizde gerçek oda, misafir ve kasa bilgileri görünür.
+- index.html
+- app.js
+- style.css
+- config.js
+- vercel.json
+- manifest.webmanifest
+- assets/
+- sql/
 
 ## Not
-`01_mobile_schema.sql` dosyasını tekrar çalıştırmanız gerekmez. Daha önce aldığınız “policy already exists” hatası bu nedenle oluşmuştur.
+
+Panel salt-okunur çalışır. Oda, misafir ve kasa bilgilerini değiştirmez; sadece Cloud'a gönderilen verileri gösterir.
